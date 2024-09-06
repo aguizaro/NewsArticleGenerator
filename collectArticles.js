@@ -6,8 +6,6 @@ dotenv.config();
 const axios = require("axios");
 const cheerio = require("cheerio");
 
-const DEVENV = process.env.DEVENV || false;
-
 // fetch article content -----------------------------------------------------
 
 /**
@@ -107,12 +105,8 @@ mongoClient.on("error", (e) => console.log("db error: " + e.message));
  */
 const insertData = async (articles, category) => {
   try {
-    const database = DEVENV
-      ? mongoClient.db("articles")
-      : mongoClient.db("admin");
-    const collection = DEVENV
-      ? database.collection("entries")
-      : database.collection("articles");
+    const database = mongoClient.db("admin");
+    const collection = database.collection("articles");
 
     let index = 0;
     for (const article of articles) {

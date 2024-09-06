@@ -7,3 +7,4 @@ data
 *.crt
 *.key
 out.txt
+db_backup
